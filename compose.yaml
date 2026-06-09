@@ -2,8 +2,7 @@ services:
   ejercicio-telegrambot:
     build:
       context: .  
-    container_name: ejercicio-telegrambot
-    network_mode: host  
+    container_name: ejercicio-telegrambot  
     environment:
       - TZ=America/Argentina/Buenos_Aires
       - TB_TOKEN=${TB_TOKEN}
@@ -12,8 +11,6 @@ services:
       - MQTT_PORT=${MQTT_PORT}
       - MQTT_USR=${MQTT_USR}
       - MQTT_PASS=${MQTT_PASS}
-      - TOPICO=${TOPICO}
-      - PICO_DEVICE_ID=${PICO_DEVICE_ID}
     volumes:
       - ../docker_iot/swag/etc/letsencrypt:/var/tmp
     restart: unless-stopped

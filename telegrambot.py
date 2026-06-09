@@ -4,23 +4,17 @@ import logging, os, ssl, socket
 import certifi
 import aiomqtt
 
-# Configuración de entorno
+
 token = os.environ["TB_TOKEN"]
 autorizados = [int(x) for x in os.environ["TB_AUTORIZADOS"].split(',')]
 MQTT_BROKER = os.environ.get("MQTT_BROKER")  
 MQTT_PORT = int(os.environ.get("MQTT_PORT"))  
-
-# CORRECCIÓN 3: Ajustados los nombres para que coincidan con tu .env
 MQTT_USER = os.environ.get("MQTT_USR")
 MQTT_PASS = os.environ.get("MQTT_PASS")
 
-# CORRECCIÓN 1: El tópico base DEBE ser el ID del dispositivo según la consigna
-TOPICO_BASE = os.environ.get("PICO_DEVICE_ID")  # martinperret.duckdns.org
+TOPICO_BASE = os.environ.get("MQTT_BROKER")  
 
-# Contexto SSL para MQTTS usando certifi
 ssl_context = ssl.create_default_context(cafile=certifi.where())
-# Nota: Si el broker de la materia usa IP directa y el certificado es para un dominio,
-# podrías necesitar poner check_hostname = False. Por ahora lo dejamos estricto:
 ssl_context.check_hostname = True
 ssl_context.verify_mode = ssl.CERT_REQUIRED
 
